@@ -1,5 +1,7 @@
 package com.mycompany.cg22079.poo.guia02;
 
+import java.time.format.DateTimeFormatter;
+
 public class RefrigeratedProduct extends Product {
     private String packagingDate;
     private double recommendedTemp;
@@ -33,5 +35,12 @@ public class RefrigeratedProduct extends Product {
         System.out.println("Fecha de Envasado: " + packagingDate);
         System.out.println("Temperatura Recomendada: " + recommendedTemp + "°C");
         System.out.println("País de Origen: " + countryOfOrigin);
+    }
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "ID: " + id + ", Nombre: " + name + ", Lote: " + lotNumber +
+               ", Fecha de Envasado: " + packagingDate +
+               ", Temperatura Recomendada: " + recommendedTemp + "°C"+ 
+                ", País de Origen: " + countryOfOrigin;
     }
 }

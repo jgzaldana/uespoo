@@ -1,5 +1,7 @@
 package com.mycompany.cg22079.poo.guia02;
 
+import java.time.format.DateTimeFormatter;
+
 public class FrozenByAir extends FrozenProduct {
     private double nitrogenPercentage;
     private double oxygenPercentage;
@@ -29,5 +31,15 @@ public class FrozenByAir extends FrozenProduct {
         System.out.println(" - Dióxido de Carbono: " + carbonDioxidePercentage + "%");
         System.out.println(" - Vapor de Agua: " + waterVapourPercentage + "%");
         System.out.println("-------------------------");
+    }
+       public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "ID: " + id + ", Nombre: " + name + ", Lote: " + lotNumber +
+               ", Fecha de Envasado: " + packagingDate +
+               ", Temperatura Recomendada: " + recommendedTemp+ "°C" + 
+                ", Composición del Aire: " + 
+               ", Nitrógeno " + nitrogenPercentage + "%"+ 
+               ", Dióxido de Carbono: " + carbonDioxidePercentage + "%"+ 
+               ", Vapor de Agua: " + waterVapourPercentage + "%";
     }
 }

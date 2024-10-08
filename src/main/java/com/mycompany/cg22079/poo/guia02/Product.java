@@ -1,5 +1,7 @@
 package com.mycompany.cg22079.poo.guia02;
 
+import java.time.format.DateTimeFormatter;
+
 public class Product {
     protected int id;
     protected String name;
@@ -44,5 +46,8 @@ public class Product {
         System.out.println("ID: " + id);
         System.out.println("Nombre: " + name);
         System.out.println("Lote: " + lotNumber);
+    }
+    public String toString() {
+        return "ID: " + id + ", Nombre: " + name + ", Lote: " + lotNumber ;
     }
 }

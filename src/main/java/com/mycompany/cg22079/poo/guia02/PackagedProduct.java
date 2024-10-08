@@ -1,5 +1,6 @@
 package com.mycompany.cg22079.poo.guia02;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class PackagedProduct extends Product {
@@ -56,9 +57,13 @@ public class PackagedProduct extends Product {
         System.out.println("Fecha de Envasado: " + packagingDate);
         System.out.println("Fecha de Caducidad: " + expiryDate);
         System.out.println("Requiere Refrigeración después de abierto: " + refrigerationStatus);
-       
-
-
     }
-
+public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String refrigerationStatus = getNeedsRefrigerationAsString(); 
+        return "ID: " + id + ", Nombre: " + name + ", Lote: " + lotNumber +
+               ", Fecha de Envasado: " + packagingDate +
+               ", Fecha de Caducidad: " + expiryDate + 
+                ", Requiere Refrigeración después de abierto: " + refrigerationStatus;
+    }
 }

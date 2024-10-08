@@ -1,5 +1,7 @@
 package com.mycompany.cg22079.poo.guia02;
 
+import java.time.format.DateTimeFormatter;
+
 public class FrozenByNitrogen extends FrozenProduct {
     private String freezingMethod;
     private int exposureTime;
@@ -21,5 +23,13 @@ public class FrozenByNitrogen extends FrozenProduct {
         System.out.println("Método de Congelación: " + freezingMethod);
         System.out.println("Tiempo de Exposición: " + exposureTime + " segundos");
         System.out.println("-------------------------");
+    }
+     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return "ID: " + id + ", Nombre: " + name + ", Lote: " + lotNumber +
+               ", Fecha de Envasado: " + packagingDate +
+               ", Temperatura Recomendada: " + recommendedTemp+ "°C" + 
+                ", Método de Congelación: " + freezingMethod + 
+               ", Tiempo de Exposición: " + exposureTime + " segundos";
     }
 }
