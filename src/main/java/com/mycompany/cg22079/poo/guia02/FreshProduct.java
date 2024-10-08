@@ -1,14 +1,10 @@
 package com.mycompany.cg22079.poo.guia02;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class FreshProduct extends Product {
    
-   
-    //private String entryDate;
-    //private String expiryDate;
-     private LocalDate entryDate;
+    private LocalDate entryDate;
     private LocalDate expiryDate;
 
     public FreshProduct(String name, String lotNumber, LocalDate entryDate, LocalDate expiryDate) {

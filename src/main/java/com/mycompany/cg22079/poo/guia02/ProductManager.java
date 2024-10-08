@@ -390,7 +390,7 @@ public class ProductManager {
             
             // Aquí, se debe manejar según el tipo de producto, ej: FreshProduct, etc.
             // Deberías tener un identificador en la línea o manejarlo de acuerdo al número de partes o una clave específica
-            return new FreshProduct(id, name, lotNumber, entryDate, expiryDate); // Ajustar según constructor
+            return new FreshProduct(name, lotNumber, entryDate, expiryDate); // Ajustar según constructor
         } catch (NumberFormatException | DateTimeParseException e) {
             System.out.println("Error al parsear la línea: " + line + " Error: " + e.getMessage());
             return null;
