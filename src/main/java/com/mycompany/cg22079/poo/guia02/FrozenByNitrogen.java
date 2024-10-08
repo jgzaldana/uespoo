@@ -4,8 +4,8 @@ public class FrozenByNitrogen extends FrozenProduct {
     private String freezingMethod;
     private int exposureTime;
 
-    public FrozenByNitrogen(int id, String name, String lotNumber, String packagingDate, double recommendedTemp, String freezingMethod, int exposureTime) {
-        super(id, name, lotNumber, packagingDate, recommendedTemp);
+    public FrozenByNitrogen(String name, String lotNumber, String packagingDate, double recommendedTemp, String freezingMethod, int exposureTime) {
+        super(ProductManager.nextId++, name, lotNumber, packagingDate, recommendedTemp);
         this.freezingMethod = freezingMethod;
         this.exposureTime = exposureTime;
     }

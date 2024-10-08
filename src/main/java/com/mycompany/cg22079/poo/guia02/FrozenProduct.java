@@ -5,8 +5,8 @@ public abstract class FrozenProduct extends Product {
     protected String packagingDate;
     protected double recommendedTemp;
 
-    public FrozenProduct(int id, String name, String lotNumber, String packagingDate, double recommendedTemp) {
-        super(id, name, "Congelado", lotNumber);
+    public FrozenProduct(String name, String lotNumber, String packagingDate, double recommendedTemp) {
+        super(ProductManager.nextId++, name, "Congelado", lotNumber);
         this.packagingDate = packagingDate;
         this.recommendedTemp = recommendedTemp;
     }

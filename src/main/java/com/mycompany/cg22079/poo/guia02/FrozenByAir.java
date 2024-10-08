@@ -6,9 +6,9 @@ public class FrozenByAir extends FrozenProduct {
     private double carbonDioxidePercentage;
     private double waterVapourPercentage;
 
-    public FrozenByAir(int id, String name, String lotNumber, String packagingDate, double recommendedTemp,
+    public FrozenByAir(String name, String lotNumber, String packagingDate, double recommendedTemp,
                        double nitrogenPercentage, double oxygenPercentage, double carbonDioxidePercentage, double waterVapourPercentage) {
-        super(id, name, lotNumber, packagingDate, recommendedTemp);
+        super(ProductManager.nextId++,name, lotNumber, packagingDate, recommendedTemp);
         this.nitrogenPercentage = nitrogenPercentage;
         this.oxygenPercentage = oxygenPercentage;
         this.carbonDioxidePercentage = carbonDioxidePercentage;
