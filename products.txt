@@ -1,0 +1,5 @@
+com.mycompany.cg22079.poo.guia02.FreshProduct@17f052a3
+com.mycompany.cg22079.poo.guia02.FreshProduct@1d56ce6a
+com.mycompany.cg22079.poo.guia02.FreshProduct@1d56ce6a
+ID: 1, Nombre: test, Lote: 123, Fecha de ingreso: 12/05/2024, Fecha de caducidad: 12/09/2024
+ID: 1, Nombre: qwe, Lote: 23, Fecha de ingreso: 12/05/2024, Fecha de caducidad: 12/06/2025, Tipo: Fresco
