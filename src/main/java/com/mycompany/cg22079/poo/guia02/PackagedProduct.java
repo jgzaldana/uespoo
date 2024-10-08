@@ -8,8 +8,8 @@ public class PackagedProduct extends Product {
     private String expiryDate;
     private boolean needsRefrigeration;
 
-    public PackagedProduct(int id, String name, String lotNumber, String packagingDate, String expiryDate, boolean needsRefrigeration) {
-        super(id, name, "Envasado", lotNumber);
+    public PackagedProduct(String name, String lotNumber, String packagingDate, String expiryDate, boolean needsRefrigeration) {
+        super(ProductManager.nextId++, name, "Envasado", lotNumber);
         this.packagingDate = packagingDate;
         this.expiryDate = expiryDate;
         this.needsRefrigeration = needsRefrigeration;

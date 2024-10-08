@@ -7,8 +7,8 @@ public class RefrigeratedProduct extends Product {
     private double recommendedTemp;
     private String countryOfOrigin;
 
-    public RefrigeratedProduct(int id, String name, String lotNumber, String packagingDate, double recommendedTemp, String countryOfOrigin) {
-        super(id, name, "Refrigerado", lotNumber);
+    public RefrigeratedProduct(String name, String lotNumber, String packagingDate, double recommendedTemp, String countryOfOrigin) {
+        super(ProductManager.nextId++,, name, "Refrigerado", lotNumber);
         this.packagingDate = packagingDate;
         this.recommendedTemp = recommendedTemp;
         this.countryOfOrigin = countryOfOrigin;

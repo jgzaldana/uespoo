@@ -1,13 +1,21 @@
 package com.mycompany.cg22079.poo.guia02;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 // Atributos
 
@@ -16,8 +24,10 @@ public class ProductManager {
     private Scanner scanner;             // Lee la entrada del usuario
     private DateTimeFormatter formatter; // Formato para fechas
     private PrintWriter writer;
+    public static int nextId = 1; 
 
     public ProductManager() {
+        
         products = new ArrayList<>();
         scanner = new Scanner(System.in);
         formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -43,7 +53,7 @@ public class ProductManager {
     public void addFreshProducts(int count) {
         for (int i = 0; i < count; i++) {
             System.out.println("Ingrese los datos del producto fresco #" + (i + 1));
-            int id = obtenerEntero("ID: ");
+            
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -53,6 +63,7 @@ public class ProductManager {
             if (entryDate.isAfter(LocalDate.now())) {
                 System.out.println("Error: La fecha de ingreso no puede ser futura.");
                 i--;
+                nextId--;
                 continue;
             }
 
@@ -60,10 +71,11 @@ public class ProductManager {
             if (expiryDate.isBefore(entryDate)) {
                 System.out.println("Error: La fecha de caducidad no puede ser anterior a la fecha de ingreso.");
                 i--;
+                nextId--;
                 continue;
             }
 
-            FreshProduct product = new FreshProduct(id, name, lotNumber, entryDate, expiryDate);
+            FreshProduct product = new FreshProduct(name, lotNumber, entryDate, expiryDate);
             addProduct(product);
         }
     }
@@ -72,7 +84,7 @@ public class ProductManager {
     public void addRefrigeratedProducts(int count) {
         for (int i = 0; i < count; i++) {
             System.out.println("Ingrese los datos del producto refrigerado #" + (i + 1));
-            int id = obtenerEntero("ID: ");
+            
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -90,7 +102,7 @@ public class ProductManager {
             String originCountry = scanner.nextLine();
 
             
-            RefrigeratedProduct product = new RefrigeratedProduct(id, name, lotNumber, packagingDate.format(formatter), recommendedTemp, originCountry);
+            RefrigeratedProduct product = new RefrigeratedProduct(name, lotNumber, packagingDate.format(formatter), recommendedTemp, originCountry);
             addProduct(product);
         }
     }
@@ -99,7 +111,7 @@ public class ProductManager {
     public void addFrozenByWaterProducts(int count) {
         for (int i = 0; i < count; i++) {
             System.out.println("Ingrese los datos del producto congelado por agua #" + (i + 1));
-            int id = obtenerEntero("ID: ");
+           
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -109,13 +121,14 @@ public class ProductManager {
             if (packagingDate.isAfter(LocalDate.now())) {
                 System.out.println("Error: La fecha de envasado no puede ser futura.");
                 i--;
+                nextId--;
                 continue;
             }
 
             double recommendedTemp = obtenerDouble("Temperatura recomendada en centígrados: ");
             double waterSalinity = obtenerDouble("Salinidad del agua (gramos de sal por litro): ");
 
-            FrozenByWater product = new FrozenByWater(id, name, lotNumber, packagingDate.format(formatter), recommendedTemp, waterSalinity);
+            FrozenByWater product = new FrozenByWater(name, lotNumber, packagingDate.format(formatter), recommendedTemp, waterSalinity);
             addProduct(product);
         }
     }
@@ -124,7 +137,6 @@ public class ProductManager {
     public void addFrozenByAirProducts(int count) {
         for (int i = 0; i < count; i++) {
             System.out.println("Ingrese los datos del producto congelado por aire #" + (i + 1));
-            int id = obtenerEntero("ID: ");
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -134,6 +146,7 @@ public class ProductManager {
             if (packagingDate.isAfter(LocalDate.now())) {
                 System.out.println("Error: La fecha de envasado no puede ser futura.");
                 i--;
+                nextId--;
                 continue;
             }
 
@@ -143,7 +156,7 @@ public class ProductManager {
             double carbonDioxidePercentage = obtenerDouble("% de dióxido de carbono: ");
             double waterVapourPercentage = obtenerDouble("% de vapor de agua: ");
 
-            FrozenByAir product = new FrozenByAir(id, name, lotNumber, packagingDate.format(formatter), recommendedTemp,
+            FrozenByAir product = new FrozenByAir(name, lotNumber, packagingDate.format(formatter), recommendedTemp,
                     nitrogenPercentage, oxygenPercentage, carbonDioxidePercentage, waterVapourPercentage);
                     addProduct(product);
         }
@@ -152,8 +165,7 @@ public class ProductManager {
     // Metodo para agregar productos congelados por nitrogeno
     public void addFrozenByNitrogenProducts(int count) {
         for (int i = 0; i < count; i++) {
-            System.out.println("Ingrese los datos del producto congelado por nitrógeno #" + (i + 1));
-            int id = obtenerEntero("ID: ");
+            System.out.println("Ingrese los datos del producto congelado por nitrógeno #" + (i + 1));            
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -163,6 +175,7 @@ public class ProductManager {
             if (packagingDate.isAfter(LocalDate.now())) {
                 System.out.println("Error: La fecha de envasado no puede ser futura.");
                 i--;
+                nextId--;
                 continue;
             }
 
@@ -171,7 +184,7 @@ public class ProductManager {
             String freezingMethod = scanner.nextLine();
             int exposureTime = obtenerEntero("Tiempo de exposición al nitrógeno (segundos): ");
 
-            FrozenByNitrogen product = new FrozenByNitrogen(id, name, lotNumber, packagingDate.format(formatter), recommendedTemp, freezingMethod, exposureTime);
+            FrozenByNitrogen product = new FrozenByNitrogen(name, lotNumber, packagingDate.format(formatter), recommendedTemp, freezingMethod, exposureTime);
             addProduct(product);
         }
         
@@ -180,8 +193,7 @@ public class ProductManager {
     // Metodo para agregar productos envasados
     public void addPackagedProducts(int count) {
         for (int i = 0; i < count; i++) {
-            System.out.println("Ingrese los datos del producto envasado #" + (i + 1));
-            int id = obtenerEntero("ID: ");
+            System.out.println("Ingrese los datos del producto envasado #" + (i + 1));            
             System.out.print("Nombre: ");
             String name = scanner.nextLine();
             System.out.print("Lote: ");
@@ -191,6 +203,7 @@ public class ProductManager {
             if (packagingDate.isAfter(LocalDate.now())) {
                 System.out.println("Error: La fecha de envasado no puede ser futura.");
                 i--;
+                nextId--; 
                 continue;
             }
 
@@ -198,6 +211,7 @@ public class ProductManager {
             if (expiryDate.isBefore(packagingDate)) {
                 System.out.println("Error: La fecha de caducidad no puede ser anterior a la fecha de envasado.");
                 i--;
+                nextId--;
                 continue;
             }
 
@@ -205,71 +219,111 @@ public class ProductManager {
             boolean needsRefrigeration = scanner.nextBoolean();
             scanner.nextLine();
 
-            PackagedProduct product = new PackagedProduct(id, name, lotNumber, packagingDate.format(formatter), expiryDate.format(formatter), needsRefrigeration);
+            PackagedProduct product = new PackagedProduct(name, lotNumber, packagingDate.format(formatter), expiryDate.format(formatter), needsRefrigeration);
             addProduct(product);
         }
     }
 
     // Metodo para mostrar todos los productos
     public void showAllProducts() {
-        if (products.isEmpty()) {
-            System.out.println("No hay productos registrados.");
-        } else {
-            for (Product product : products) {
+    File file = new File("products.txt");  // Asumiendo que los productos están guardados en products.txt
+    if (!file.exists() || file.length() == 0) {
+        System.out.println("No hay productos registrados.");
+        return;
+    }
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            Product product = parseProduct(line);
+            if (product != null) {
                 product.displayInfo();
                 System.out.println("-------------------------");
             }
         }
+    } catch (IOException e) {
+        System.out.println("Error al leer el archivo: " + e.getMessage());
     }
+}
 
     // Metodo para eliminar un producto
     public void deleteProduct(int id) {
-        boolean removed = products.removeIf(product -> product.getId() == id);
-        if (removed) {
+    File file = new File("products.txt");
+    if (!file.exists()) {
+        System.out.println("Archivo no encontrado.");
+        return;
+    }
+
+    try {
+        List<String> outLines = Files.readAllLines(Paths.get("products.txt")).stream()
+                                    .filter(line -> !line.contains("ID: " + id + ","))
+                                    .collect(Collectors.toList());
+
+        if (outLines.size() < Files.readAllLines(Paths.get("products.txt")).size()) {
+            Files.write(Paths.get("products.txt"), outLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
             System.out.println("Producto con ID " + id + " eliminado.");
         } else {
             System.out.println("Producto con ID " + id + " no encontrado.");
         }
+    } catch (IOException e) {
+        System.out.println("Error al leer o escribir en el archivo: " + e.getMessage());
     }
+}
 
     // Metodo para modificar un producto
     public void updateProduct(int id, Scanner scanner) {
-        Product productToModify = null;
-        for (Product product : products) {
-            if (product.getId() == id) {
-                productToModify = product;
-                break;
+        List<String> lines;
+        String productLine = null;
+        int lineIndex = -1;
+    
+        try {
+            lines = Files.readAllLines(Paths.get("products.txt"));
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).contains("ID: " + id + ",")) {
+                    productLine = lines.get(i);
+                    lineIndex = i;
+                    break;
+                }
             }
-        }
-
-        if (productToModify == null) {
-            System.out.println("Producto con ID " + id + " no encontrado.");
-            return;
-        }
-
-        System.out.println("Seleccione el campo que desea modificar:");
-        System.out.println("1. Nombre");
-        System.out.println("2. Lote");
-
-        int option = obtenerEntero("Opción: ");
-
-        switch (option) {
-            case 1:
-                System.out.print("Ingrese el nuevo nombre: ");
-                String newName = scanner.nextLine();
-                productToModify.setName(newName);
-                break;
-            case 2:
-                System.out.print("Ingrese el nuevo número de lote: ");
-                String newLot = scanner.nextLine();
-                productToModify.setLotNumber(newLot);
-                break;
-            default:
-                System.out.println("Opción no válida.");
+    
+            if (productLine == null) {
+                System.out.println("Producto con ID " + id + " no encontrado.");
                 return;
+            }
+    
+            System.out.println("Seleccione el campo que desea modificar:");
+            System.out.println("1. Nombre");
+            System.out.println("2. Lote");
+    
+            int option = obtenerEntero("Opción: ");
+            String[] parts = productLine.split(", ");
+            switch (option) {
+                case 1:
+                    System.out.print("Ingrese el nuevo nombre: ");
+                    String newName = scanner.nextLine();
+                    parts[1] = "Nombre: " + newName;
+                    break;
+                case 2:
+                    System.out.print("Ingrese el nuevo número de lote: ");
+                    String newLot = scanner.nextLine();
+                    parts[2] = "Lote: " + newLot;
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+                    return;
+            }
+    
+            // Reconstruir la línea actualizada
+            productLine = String.join(", ", parts);
+            lines.set(lineIndex, productLine);
+    
+            // Escribir todas las líneas de vuelta al archivo
+            Files.write(Paths.get("products.txt"), lines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            System.out.println("Producto actualizado.");
+    
+        } catch (IOException e) {
+            System.out.println("Error al leer o escribir en el archivo: " + e.getMessage());
         }
-
-        System.out.println("Producto actualizado.");
     }
 
     // Metodo para obtener una fecha con validacion
@@ -318,5 +372,27 @@ public class ProductManager {
             }
         }
         return valor;
+    }
+
+    private Product parseProduct(String line) {
+        String[] parts = line.split(", ");
+        if (parts.length < 5) {
+            System.out.println("Error de formato en la línea: " + line);
+            return null;
+        }
+        try {
+            int id = Integer.parseInt(parts[0].split(": ")[1].trim());
+            String name = parts[1].split(": ")[1].trim();
+            String lotNumber = parts[2].split(": ")[1].trim();
+            LocalDate entryDate = LocalDate.parse(parts[3].split(": ")[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate expiryDate = LocalDate.parse(parts[4].split(": ")[1].trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            
+            // Aquí, se debe manejar según el tipo de producto, ej: FreshProduct, etc.
+            // Deberías tener un identificador en la línea o manejarlo de acuerdo al número de partes o una clave específica
+            return new FreshProduct(id, name, lotNumber, entryDate, expiryDate); // Ajustar según constructor
+        } catch (NumberFormatException | DateTimeParseException e) {
+            System.out.println("Error al parsear la línea: " + line + " Error: " + e.getMessage());
+            return null;
+        }
     }
 }

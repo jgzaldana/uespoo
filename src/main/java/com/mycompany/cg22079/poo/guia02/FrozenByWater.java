@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class FrozenByWater extends FrozenProduct {
     private double waterSalinity;
 
-    public FrozenByWater(int id, String name, String lotNumber, String packagingDate, double recommendedTemp, double waterSalinity) {
-        super(id, name, lotNumber, packagingDate, recommendedTemp);
+    public FrozenByWater(String name, String lotNumber, String packagingDate, double recommendedTemp, double waterSalinity) {
+        super(ProductManager.nextId++,, name, lotNumber, packagingDate, recommendedTemp);
         this.waterSalinity = waterSalinity;
     }
 
