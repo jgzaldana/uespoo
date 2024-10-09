@@ -34,7 +34,7 @@ public class RefrigeratedProduct extends Product {
         System.out.println("Lote: " + getLotNumber());
         System.out.println("Fecha de Envasado: " + packagingDate);
         System.out.println("Temperatura Recomendada: " + recommendedTemp + "°C");
-        System.out.println("País de Origen: " + countryOfOrigin);
+        System.out.println("País de Destino: " + countryOfOrigin);
     }
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
