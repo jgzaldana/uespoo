@@ -1,5 +1,5 @@
-
-ID: 0, Nombre: test1, Lote: 1234, Fecha de ingreso: 12/06/2024, Fecha de caducidad: 12/06/2025, Tipo: Fresco
-ID: 0, Nombre: test01, Lote: 4526, Fecha de ingreso: 12/07/2024, Fecha de caducidad: 25/08/2025, Tipo: Fresco
-ID: 1, Nombre: test22, Lote: 566, Fecha de ingreso: 12/06/2024, Fecha de caducidad: 12/09/2025, Tipo: Fresco
-ID: 1, Nombre: test, Lote: 123, Fecha de ingreso: 12/05/2024, Fecha de caducidad: 12/05/2025, Tipo: Fresco
+com.mycompany.cg22079.poo.guia02.FreshProduct@17f052a3
+com.mycompany.cg22079.poo.guia02.FreshProduct@1d56ce6a
+com.mycompany.cg22079.poo.guia02.FreshProduct@1d56ce6a
+ID: 1, Nombre: test, Lote: 123, Fecha de ingreso: 12/05/2024, Fecha de caducidad: 12/09/2024
+ID: 1, Nombre: qwe, Lote: 23, Fecha de ingreso: 12/05/2024, Fecha de caducidad: 12/06/2025, Tipo: Fresco

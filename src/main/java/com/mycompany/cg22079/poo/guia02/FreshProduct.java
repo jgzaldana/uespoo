@@ -32,7 +32,7 @@ public class FreshProduct extends Product {
         System.out.println("Nombre: " + getName());
         System.out.println("Lote: " + getLotNumber());
         System.out.println("Fecha de Ingreso: " + entryDate);
-        System.out.println("Fecha de Caducidad: " + expiryDate);
+        System.out.println("Fecha de Final: " + expiryDate);
     }
     
     public String toString() {
