@@ -34,7 +34,7 @@ public class ProductManager {
         try {
             writer = new PrintWriter(new FileWriter("products.txt", true));  // Abrir el archivo en modo append
         } catch (IOException e) {
-            System.out.println("Error al abrir o crear el archivo.");
+            System.out.println("Error.");
         }
     }
     public void closeWriter() {
